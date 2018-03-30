@@ -21,7 +21,6 @@ public class SnakeTest {
     private static final Position POSITION_3_0 = new Position(3, 0);
     private static final Position POSITION_4_0 = new Position(4, 0);
     private static final Position POSITION_4_2 = new Position(4, 2);
-    private static final Position POSITION_6_2 = new Position(6, 2);
     private static final Position POSITION_4_1 = new Position(4, 1);
     private static final Position POSITION_6_1 = new Position(6, 1);
 

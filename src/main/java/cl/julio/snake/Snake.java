@@ -38,6 +38,10 @@ public class Snake {
         return getLastNode().position;
     }
 
+    public Direction getCurrentDirection() {
+        return currentDirection;
+    }
+
     public void changeDirection(Direction direction) {
         this.currentDirection = direction;
     }
@@ -87,8 +91,17 @@ public class Snake {
             return;
 
         Position newLastPosition = getNewLastPositionBasedOnCurrentDirection();
-
         addTail(newLastPosition);
+    }
+
+    /**
+     * Determine if the snake can eat the food if and only if both, snake and food, are in the same position.
+     *
+     * @param food to be eaten
+     * @return true if the snake can eat the food, otherwise false.
+     */
+    private boolean cannotEat(Food food) {
+        return !getHeadPosition().equals(food.getPosition());
     }
 
     private Position getNewLastPositionBasedOnCurrentDirection() {
@@ -106,22 +119,11 @@ public class Snake {
         }
     }
 
-    /**
-     * Determine if the snake can eat the food if and only if both, snake and food, are in the same position.
-     *
-     * @param food to be eaten
-     * @return true if the snake can eat the food, otherwise false.
-     */
-    private boolean cannotEat(Food food) {
-        return !getHeadPosition().equals(food.getPosition());
-    }
-
     private void addTail(Position position) {
         Node lastNode = getLastNode();
         lastNode.next = new Node(position);
         length++;
     }
-
 
     private static class Node {
         Position position;
