@@ -1,5 +1,6 @@
 package cl.julio.snake;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -325,6 +326,42 @@ public class SnakeTest {
         snake.eat(food);
 
         assertThat(snake.getLastPosition(), is(POSITION_0_1));
+    }
+
+    @Test
+    public void shouldNotChangeDirectionIfChangeToLeftWhileGoingRight() {
+        Snake snake = new Snake(ORIGIN);
+        snake.changeDirection(Direction.RIGHT);
+        snake.changeDirection(Direction.LEFT);
+
+        assertThat(snake.getCurrentDirection(), is(Direction.RIGHT));
+    }
+
+    @Test
+    public void shouldNotChangeDirectionIfChangeToRightWhileGoingLeft() {
+        Snake snake = new Snake(ORIGIN);
+        snake.changeDirection(Direction.LEFT);
+        snake.changeDirection(Direction.RIGHT);
+
+        assertThat(snake.getCurrentDirection(), is(Direction.LEFT));
+    }
+
+    @Test
+    public void shouldNotChangeDirectionIfChangeToUpWhileGoingDown() {
+        Snake snake = new Snake(ORIGIN);
+        snake.changeDirection(Direction.DOWN);
+        snake.changeDirection(Direction.UP);
+
+        assertThat(snake.getCurrentDirection(), is(Direction.DOWN));
+    }
+
+    @Test
+    public void shouldNotChangeDirectionIfChangeToDownWhileGoingUp() {
+        Snake snake = new Snake(ORIGIN);
+        snake.changeDirection(Direction.UP);
+        snake.changeDirection(Direction.DOWN);
+
+        assertThat(snake.getCurrentDirection(), is(Direction.UP));
     }
 
 }

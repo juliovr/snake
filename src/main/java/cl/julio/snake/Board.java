@@ -22,6 +22,10 @@ public class Board {
         return snake;
     }
 
+    public Food getFood() {
+        return food;
+    }
+
     /**
      * Create the snake in the middle of the board at creating the game with RIGHT Direction.
      *
@@ -46,9 +50,16 @@ public class Board {
         return new Food(position);
     }
 
+    /**
+     * Update the game logic: move the snake and try to eat the food.
+     */
     public void update() {
         int oldLength = snake.getLength();
         snake.move();
+
+        if (isSnakeOutOfTheBoard(snake.getHeadPosition()))
+            throw new SnakeOutOfBoardException();
+
         snake.eat(food);
         int newLength = snake.getLength();
 
@@ -57,8 +68,9 @@ public class Board {
         }
     }
 
-//    public void changeSnakeDirection(Direction direction) {
-//        snake.changeDirection(direction);
-//    }
+    private boolean isSnakeOutOfTheBoard(Position headPosition) {
+        return headPosition.getX() < 0 || headPosition.getX() > width
+                || headPosition.getY() < 0 || headPosition.getY() > height;
+    }
 
 }
